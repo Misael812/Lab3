@@ -8,10 +8,9 @@
 6. ~~Predict the behavior of the program.~~
 7. ~~Run the program and compare the output to your prediction.~~
 
-### [](https://github.com/uofu-emb/rtos/tree/main/labs/3.threads#activity-1)Activity 1
-
-1. Are all uses of the shared resources in protected critical sections? Make any modifications necessary to protect the critical sections.
-2. Is the critical section starving the system? If so, make modifications to prevent starving the system.
+### Activity 1
+1. ~~Are all uses of the shared resources in protected critical sections? Make any modifications necessary to protect the critical sections.~~
+2. ~~Is the critical section starving the system? If so, make modifications to prevent starving the system.~~
 
 ### Activity 2
 
