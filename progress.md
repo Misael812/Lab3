@@ -1,12 +1,12 @@
 ### Activity 0
 
-1. Create a new project.
-2. Copy in the `thread.c` example file. Commit.
-3. Identify the execution contexts in the program, and their entry points.
-4. Identify shared state between execution contexts.
-5. Identify the semaphore.
-6. Predict the behavior of the program.
-7. Run the program and compare the output to your prediction.
+1. ~~Create a new project.~~
+2. ~~Copy in the `thread.c` example file. Commit.~~
+3. ~~Identify the execution contexts in the program, and their entry points.~~
+4. ~~Identify shared state between execution contexts.~~
+5. ~~Identify the semaphore.~~
+6. ~~Predict the behavior of the program.~~
+7. ~~Run the program and compare the output to your prediction.~~
 
 ### [](https://github.com/uofu-emb/rtos/tree/main/labs/3.threads#activity-1)Activity 1
 
