@@ -19,12 +19,7 @@ void thread_entry(void)
 	k_timer_init(&timer, NULL, NULL);
 
 	while (1) {
-        k_sem_take(&semaphore, K_FOREVER);
-        thread_thread(&counter);
-        k_sem_give(&semaphore);
-
-		k_timer_start(&timer, K_MSEC(SLEEPTIME), K_NO_WAIT);
-		k_timer_status_sync(&timer);
+        thread_counter(&counter, &semaphore, "thread",&timer, K_MSEC(SLEEPTIME));
 	}
 }
 
@@ -47,11 +42,12 @@ int main(void)
 	k_timer_init(&timer, NULL, NULL);
 
 	while (1) {
-        k_sem_take(&semaphore, K_FOREVER);
-        main_thread(&counter);
-        k_sem_give(&semaphore);
-		k_timer_start(&timer, K_MSEC(SLEEPTIME), K_NO_WAIT);
-		k_timer_status_sync(&timer);
+        thread_counter(&counter, &semaphore, "main",&timer, K_MSEC(SLEEPTIME));
+        // k_sem_take(&semaphore, K_FOREVER);
+        // main_thread(&counter);
+        // k_sem_give(&semaphore);
+		// k_timer_start(&timer, K_MSEC(SLEEPTIME), K_NO_WAIT);
+		// k_timer_status_sync(&timer);
 	}
 
 	return 0;

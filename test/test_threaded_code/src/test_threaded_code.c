@@ -3,44 +3,38 @@
 #include <devicetree.h>
 #include <stdio.h>
 #include <unity.h>
+#include "thread_fn.h"
 
 
 # define TIMEOUT_VAL 50
 
-void setUp(void) {}
+
+struct k_sem semaphore;
+struct k_timer timer;
+
+void setUp(void) {
+    k_sem_init(&semaphore, 1,1);
+    k_timer_init(&timer, NULL, NULL);
+}
 
 void tearDown(void) {}
 
-
-void test_thread_thread_only(void, *semaphore) {
+/// Activity 2 ///
+void test_locks_thread_counter() {
     int counter = 0;
-    main_thread(&counter);
-    thread_thread(&counter);
-    TEST_ASSERT_EQUAL_INT(2, counter);
+
+    // Test if the semaphore locks the thread_counter function
+    k_sem_take(&semaphore, K_FOREVER);
+    thread_counter(&counter, &semaphore, "thread", &timer, K_MSEC(100));
+    
+    // Tests to make sure that the counter is not incremented
+    TEST_ASSERT_EQUAL_INT(0, counter);
 }
 
-void test_main_thread_only(void, *semaphore) {
-    int counter = 0;
-    main_thread(&counter);
-    // Test functionality within thread_thread
-    TEST_ASSERT_EQUAL_INT(1, counter);
-}
-
-
-void test_main_thread_and_thread_thread(void, *semaphore) {
-    int counter = 0;
-    main_thread(&counter);
-    thread_thread(&counter);
-    main_thread(&counter);
-    TEST_ASSERT_EQUAL_INT(3, counter);
-}
 
 
 void main(void){
     UNITY_BEGIN();
-    struct k_sem semaphore;
-    RUN_TEST(test_thread_thread_only, &semaphore);
-    RUN_TEST(test_main_thread_only, &semaphore);
-    RUN_TEST(test_main_thread_and_thread_thread, &semaphore);
+    RUN_TEST(test_locks_thread_counter);
     UNITY_END();
 }

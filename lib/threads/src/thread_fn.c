@@ -1,7 +1,7 @@
-#pragma once
 #include "thread_fn.h"
-#include <zephyr.h>
 
+# define TIMER_TIME 1000
+# define STACKSIZE 2000
 //I think we need to rework these, so that the semaphore take and give is within the function.
 // Shown below in the thread_counter function.
 
@@ -19,13 +19,23 @@
  * @param thread_priority Integer that represents the priority of the thread.
  */
 void thread_counter(int* counter,
-                    struct k_sem semaphore,
+                    struct k_sem *semaphore,
                     char* thread_name,
-                    int thread_priority){
-    k_sem_take(&semaphore, K_FOREVER);
-    *counter = *counter + 1;
-    print("hello world from %s! Count %d\n", thread_name, *counter);
-    k_sem_give(&semaphore);
+                    struct k_timer *timer,
+                    k_timeout_t timeout){
+
+    if (k_sem_take(semaphore, timeout) == 1){
+        *counter = *counter + 1;
+        printk("hello world from %s! Count %d\n", thread_name, *counter);
+        k_sem_give(semaphore);
+        return;
+    }
+    else{
+        k_sem_give(semaphore);
+        k_timer_start(timer, K_MSEC(TIMER_TIME), K_NO_WAIT);
+        k_timer_status_sync(timer);
+        return;
+    }
 }
 
 /**

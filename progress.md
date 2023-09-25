@@ -14,12 +14,12 @@
 
 ### Activity 2
 
-1. Write a unit test for the thread code. Remember to separate functionality from execution context concerns, timing, and looping.
-2. You'll need to make some modifications to the code. Hints:
-    1. You don't need to test execution in a thread, but you should test the behavior of the lock and the side effect.
-    2. k_semaphore_take includes a timeout on waiting for the semaphore.
-    3. k_semaphore_take returns a status code, don't forget to check it.
-3. Don't forget to commit as you go.
+~~1. Write a unit test for the thread code. Remember to separate functionality from execution context concerns, timing, and looping.~~
+~~2. You'll need to make some modifications to the code. Hints:~~
+~~    1. You don't need to test execution in a thread, but you should test the behavior of the lock and the side effect.~~
+~~    2. k_semaphore_take includes a timeout on waiting for the semaphore.~~
+~~    3. k_semaphore_take returns a status code, don't forget to check it.~~
+~~3. Don't forget to commit as you go.~~
 
 ### Activity 3
 
