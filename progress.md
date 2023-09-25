@@ -23,14 +23,14 @@
 
 ### Activity 3
 
-1. Create a thread that calculates the nth element of the Fibonacci sequence.
-    1. Fibonacci sequence defines the nth element as the sum of the n-1 and n-2 elements. n=0 is 0 and n=1 is 1.
-    2. You don't need to store the whole sequence, just calculate the target element.
-    3. You'll need to use entry point parameters on k_thread_create.
-    4. Pass in a target element number and an output parameter to store the result.
-2. Create a supervisor thread implementation that spawns 16 copies of the thread to calculate 16 elements, then blocks waiting for all threads to exit before exiting.
-    1. Hint: Look at k_thread_join, K_THREAD_STACK_ARRAY_DEFINE.
-3. Write a test. Your test should spawn the supervisor thread and wait for it to complete and check the results.
+~~1. Create a thread that calculates the nth element of the Fibonacci sequence.~~
+~~    1. Fibonacci sequence defines the nth element as the sum of the n-1 and n-2 elements. n=0 is 0 and n=1 is 1.~~
+~~    2. You don't need to store the whole sequence, just calculate the target element.~~
+~~    3. You'll need to use entry point parameters on k_thread_create.~~
+~~    4. Pass in a target element number and an output parameter to store the result.~~
+~~2. Create a supervisor thread implementation that spawns 16 copies of the thread to calculate 16 elements, then blocks waiting for all threads to exit before exiting.~~
+~~    1. Hint: Look at k_thread_join, K_THREAD_STACK_ARRAY_DEFINE.~~
+~~3. Write a test. Your test should spawn the supervisor thread and wait for it to complete and check the results.~~
 
 
 ### Activity 4
