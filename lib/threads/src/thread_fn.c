@@ -90,3 +90,38 @@ void thread_thread(int* counter){
     *counter = *counter + 1;
     printk("hello world from %s! Count %d\n", "thread", *counter);
 }
+
+
+void orphaned_lock(struct k_sem * semaphore, k_timeout_t timeout, int * counter)
+{
+    if(k_sem_take(semaphore, timeout)){
+        return;
+    }
+
+    *counter = *counter + 1;
+
+    if(*counter % 2){
+        return;
+    }
+
+    printk("Count %d\n", *counter);
+
+    k_sem_give(semaphore);
+}
+
+void unorphaned_lock(struct k_sem * semaphore, k_timeout_t timeout, int * counter){
+    if(k_sem_take(semaphore, timeout)){
+        return;
+    }
+
+    *counter = *counter + 1;
+
+    if(*counter % 2){
+        k_sem_give(semaphore);
+        return;
+    }
+
+    printk("Count %d\n", *counter);
+
+    k_sem_give(semaphore);
+}

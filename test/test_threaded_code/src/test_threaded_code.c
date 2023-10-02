@@ -87,9 +87,56 @@ void test_deadlock(void){
     TEST_ASSERT_EQUAL_INT(0, deadlock_counter_variable);
 }
 
+void test_orphanlock(void){
+    struct k_sem semaphore_orphan;
+    k_sem_init(&semaphore_orphan, 1, 1);
+
+    int count = 1;
+
+    orphaned_lock(&semaphore_orphan, K_MSEC(500), &count);
+
+    TEST_ASSERT_EQUAL_INT(2, count);
+    TEST_ASSERT_EQUAL_INT(1, k_sem_count_get(&semaphore_orphan));
+
+    orphaned_lock(&semaphore_orphan, K_MSEC(500), &count);
+
+    TEST_ASSERT_EQUAL_INT(3, count);
+    TEST_ASSERT_EQUAL_INT(0, k_sem_count_get(&semaphore_orphan));
+
+    orphaned_lock(&semaphore_orphan, K_MSEC(500), &count);
+
+    TEST_ASSERT_EQUAL_INT(3, count);
+    TEST_ASSERT_EQUAL_INT(0, k_sem_count_get(&semaphore_orphan));
+}
+
+void test_unorphanlock(void){
+    struct k_sem semaphore_orphan;
+    k_sem_init(&semaphore_orphan, 1, 1);
+
+    int count = 1;
+
+    unorphaned_lock(&semaphore_orphan, K_MSEC(500), &count);
+
+    TEST_ASSERT_EQUAL_INT(2, count);
+    TEST_ASSERT_EQUAL_INT(1, k_sem_count_get(&semaphore_orphan));
+
+    unorphaned_lock(&semaphore_orphan, K_MSEC(500), &count);
+
+    TEST_ASSERT_EQUAL_INT(3, count);
+    TEST_ASSERT_EQUAL_INT(1, k_sem_count_get(&semaphore_orphan));
+
+    unorphaned_lock(&semaphore_orphan, K_MSEC(500), &count);
+
+    TEST_ASSERT_EQUAL_INT(4, count);
+    TEST_ASSERT_EQUAL_INT(1, k_sem_count_get(&semaphore_orphan));
+}
+
+
 void main(void){
     UNITY_BEGIN();
     RUN_TEST(test_locks_thread_counter);
     RUN_TEST(test_deadlock);
+    RUN_TEST(test_orphanlock);
+    RUN_TEST(test_unorphanlock);
     UNITY_END();
 }
