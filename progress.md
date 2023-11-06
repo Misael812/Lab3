@@ -47,3 +47,8 @@
 2. Write a test showing the thread will deadlock.
 3. Create a new version of the code that will not deadlock.
 4. Write a test showing the thread will not deadlock.
+
+
+## Running the Tests
+To run tests:
+`pio test --without-uploading --environment disco_test`
