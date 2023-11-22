@@ -21,6 +21,6 @@ jobs:
         run: pip install --upgrade platformio
 
       - name: Build PlatformIO Project
-        run: pio run
-     - name: Run Tests
-        run: pio test --without-uploading --environment unit-test
+        run: pio run -vv
+      - name: Run Tests
+        run: pio test --without-uploading --environment disco_test
